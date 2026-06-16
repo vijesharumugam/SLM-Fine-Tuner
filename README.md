@@ -1,4 +1,4 @@
-# Domain-Specific LLM Fine-Tuning Platform (SLM Edition)
+# Domain-Specific SLM Fine-Tuning Platform 
 
 A complete, production-ready AI application for fine-tuning lightweight Small Language Models (SLMs) using QLoRA, evaluating performance, and chatting in real-time. Designed specifically for low-spec environments (laptops, Colab, Kaggle).
 
