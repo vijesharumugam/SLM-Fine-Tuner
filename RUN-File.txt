@@ -1,0 +1,36 @@
+!unzip backend.zip
+
+import os
+import subprocess
+from pyngrok import ngrok
+
+# 1. Kill the broken ghost processes to bypass the 5 endpoint limit
+ngrok.kill()
+os.system("pkill -f ngrok")
+os.system("pkill -f uvicorn")
+
+# 2. Provide your Ngrok Auth Token
+ngrok.set_auth_token("3F1hrDecngiLLHKMo8T99r6DDY8_5paukauwPLoq8L5wk4rH9")
+
+# 3. Start a fresh ngrok tunnel
+public_url = ngrok.connect(8000).public_url
+print("\n" + "="*50)
+print("🚀 COPY THIS NEW BACKEND URL:", public_url)
+print("="*50 + "\n")
+
+# 4. Start the FastAPI server in the background
+os.chdir('/content/backend')
+subprocess.Popen(["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"])
+print("Server started successfully in the background!")
+
+
+import os
+import subprocess
+
+# Kill the old server
+os.system("pkill -f uvicorn")
+
+# Start the new server
+os.chdir('/content/backend')
+subprocess.Popen(["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"])
+print("✅ Restarted FastAPI server with new Chat Templates!")
